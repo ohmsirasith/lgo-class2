@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Idea Board - Collect & Manage Ideas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header>
+    <div class="container" style="padding-top: 0; padding-bottom: 0;">
+      <div class="header-inner">
+        <div class="brand-section">
+          <div class="brand-icon">💡</div>
+          <div>
+            <h1 class="brand-title">Idea Board</h1>
+            <p class="brand-tagline">Collect and manage your ideas</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button id="addIdeaBtn" class="btn btn-primary">
+            <span>+</span> Add New Idea
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="container">
+    <!-- Statistics Overview Bar -->
+    <div class="stats-bar" id="statsBar">
+      <div class="stat-pill">
+        <span>Total Ideas:</span>
+        <span class="stat-count" id="statTotal">0</span>
+      </div>
+      <div class="stat-pill">
+        <span>New:</span>
+        <span class="stat-count" id="statNew">0</span>
+      </div>
+      <div class="stat-pill">
+        <span>Considering:</span>
+        <span class="stat-count" id="statConsidering">0</span>
+      </div>
+      <div class="stat-pill">
+        <span>Selected:</span>
+        <span class="stat-count" id="statSelected">0</span>
+      </div>
+    </div>
+
+    <!-- Ideas Grid -->
+    <div id="ideasGrid" class="ideas-grid"></div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="empty-state" style="display: none;">
+      <div class="empty-icon">💭</div>
+      <h2 class="empty-title">No ideas yet</h2>
+      <p class="empty-desc">Your board is empty. Start brainstorming and capture your first idea!</p>
+      <button class="btn btn-primary" onclick="openCreateModal()">
+        + Create Your First Idea
+      </button>
+    </div>
+  </main>
+
+  <!-- Create / Edit Idea Modal -->
+  <div id="ideaModal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <h2 id="modalTitle" class="modal-title">Add New Idea</h2>
+        <button id="closeModalBtn" class="modal-close-btn" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="ideaForm">
+        <div class="modal-body">
+          <input type="hidden" id="ideaId" value="">
+
+          <div class="form-group">
+            <label for="ideaTitle">Idea Title <span class="required-star">*</span></label>
+            <input type="text" id="ideaTitle" placeholder="e.g. Smart Search Feature" required autocomplete="off">
+          </div>
+
+          <div class="form-group">
+            <label for="ideaStatus">Status <span class="required-star">*</span></label>
+            <select id="ideaStatus" required>
+              <option value="New" selected>New</option>
+              <option value="Considering">Considering</option>
+              <option value="Selected">Selected</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="ideaDescription">Description <span class="required-star">*</span></label>
+            <textarea id="ideaDescription" placeholder="Briefly describe the idea and why it matters..." required></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="cancelModalBtn" class="btn btn-secondary">Cancel</button>
+          <button type="submit" id="saveIdeaBtn" class="btn btn-primary">Save Idea</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Service Layer & UI Logic -->
+  <script src="api.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
